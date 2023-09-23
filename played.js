@@ -1,6 +1,6 @@
 // Define an array to store recently played games
 const recentlyPlayedGames = [];
-const maxRecentlyPlayedGames = 5; // Maximum number of recently played games to display
+const maxRecentlyPlayedGames = 10; // Maximum number of recently played games to display
 
 // Function to add a game to the recently played list
 function addGameToRecentlyPlayed(name, imageSrc, url) {
