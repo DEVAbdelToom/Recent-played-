@@ -42,28 +42,45 @@ const favoriteButtons = document.querySelectorAll('.favorite-button');
 
 
 
+// Define an array to store recently played games
+const recentlyPlayedGames = [];
+
 // Function to add a game to the recently played list
 function addGameToRecentlyPlayed(name, imageSrc, url) {
     recentlyPlayedGames.unshift({ name, imageSrc, url });
     // Limit the recently played list to a certain number of games, if needed
+    const maxRecentlyPlayedGames = 5; // Adjust this value as per your preference
     if (recentlyPlayedGames.length > maxRecentlyPlayedGames) {
         recentlyPlayedGames.pop(); // Remove the last game
     }
     displayRecentlyPlayedGames();
 }
 
-function handleGameLinkClick(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    const gameLink = event.currentTarget;
-    const gameImage = gameLink.querySelector('img');
-    if (gameImage) {
-        const gameInfo = {
-            name: gameLink.textContent,
-            imageSrc: gameImage.src,
-            url: gameLink.href,
-        };
-        addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
-    }
+// Function to display recently played games
+function displayRecentlyPlayedGames() {
+    const recentlyPlayedContainer = document.querySelector('.recently-played-games');
+    recentlyPlayedContainer.innerHTML = ''; // Clear the container
+
+    recentlyPlayedGames.forEach((game) => {
+        // Create elements to display each game
+        const gameContainer = document.createElement('div');
+        gameContainer.classList.add('recent-game');
+
+        const gameImage = document.createElement('img');
+        gameImage.src = game.imageSrc;
+
+        const gameName = document.createElement('p');
+        gameName.textContent = game.name;
+
+        const gameLink = document.createElement('a');
+        gameLink.href = game.url;
+        gameLink.appendChild(gameImage);
+        gameLink.appendChild(gameName);
+
+        // Append the game link to the recently played container
+        gameContainer.appendChild(gameLink);
+        recentlyPlayedContainer.appendChild(gameContainer);
+    });
 }
 
 // Attach a click event listener to each game link
@@ -72,7 +89,14 @@ gameLinks.forEach((gameLink) => {
     gameLink.addEventListener("click", handleGameLinkClick);
 });
 
-
-
-
-
+// Function to handle game link clicks
+function handleGameLinkClick(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    const gameLink = event.currentTarget;
+    const gameInfo = {
+        name: gameLink.querySelector('h2').textContent,
+        imageSrc: gameLink.querySelector('img').src,
+        url: gameLink.href,
+    };
+    addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
+}
