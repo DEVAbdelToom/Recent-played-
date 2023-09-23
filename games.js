@@ -42,6 +42,35 @@ const favoriteButtons = document.querySelectorAll('.favorite-button');
 
 
 
+// Function to add a game to the recently played list
+function addGameToRecentlyPlayed(name, imageSrc, url) {
+    recentlyPlayedGames.unshift({ name, imageSrc, url });
+    // Limit the recently played list to a certain number of games, if needed
+    if (recentlyPlayedGames.length > maxRecentlyPlayedGames) {
+        recentlyPlayedGames.pop(); // Remove the last game
+    }
+    displayRecentlyPlayedGames();
+}
+
+// Function to handle game link clicks
+function handleGameLinkClick(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    const gameLink = event.currentTarget;
+    const gameInfo = {
+        name: gameLink.textContent,
+        imageSrc: gameLink.querySelector('img').src,
+        url: gameLink.href,
+    };
+    addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
+}
+
+// Attach a click event listener to each game link
+const gameLinks = document.querySelectorAll(".box-text a");
+gameLinks.forEach((gameLink) => {
+    gameLink.addEventListener("click", handleGameLinkClick);
+});
+
+
 
 
 
