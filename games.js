@@ -52,16 +52,18 @@ function addGameToRecentlyPlayed(name, imageSrc, url) {
     displayRecentlyPlayedGames();
 }
 
-// Function to handle game link clicks
 function handleGameLinkClick(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     const gameLink = event.currentTarget;
-    const gameInfo = {
-        name: gameLink.textContent,
-        imageSrc: gameLink.querySelector('img').src,
-        url: gameLink.href,
-    };
-    addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
+    const gameImage = gameLink.querySelector('img');
+    if (gameImage) {
+        const gameInfo = {
+            name: gameLink.textContent,
+            imageSrc: gameImage.src,
+            url: gameLink.href,
+        };
+        addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
+    }
 }
 
 // Attach a click event listener to each game link
