@@ -16,7 +16,74 @@
 
     <link rel="stylesheet" href="unpkg.com_swiper@7.3.1_swiper-bundle.min.css">
 </head>
+<style>
+    /* CSS for Recently Played section */
+.recently-played {
+    padding: 20px 0;
+    background-color: #f5f5f5;
+}
 
+.recently-played .heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.recently-played .heading i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #333;
+}
+
+.recently-played .heading h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.recently-played-content {
+    display: flex;
+    overflow-x: auto;
+}
+
+/* CSS for individual game cards */
+.recent-game {
+    width: 200px;
+    margin-right: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.recent-game img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.recent-game h3 {
+    font-size: 18px;
+    padding: 10px 16px;
+    color: #333;
+}
+
+.recent-game a {
+    display: block;
+    padding: 10px 16px;
+    background-color: #4caf50;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    border-top: 1px solid #333;
+    transition: background-color 0.3s;
+}
+
+.recent-game a:hover {
+    background-color: #45a049;
+}
+
+</style>
 <body>  
  
     <header>
