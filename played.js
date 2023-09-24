@@ -68,10 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
-            // Function to handle game link clicks
+// Function to handle game link clicks
 function handleGameLinkClick(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
     const gameLink = event.currentTarget;
     const gameInfo = {
         name: gameLink.querySelector("h2").textContent,
@@ -79,11 +77,9 @@ function handleGameLinkClick(event) {
         url: gameLink.querySelector("a").href,
     };
 
-    // Set the iframe source to the game's URL
-    const iframe = document.querySelector(".game-iframe");
-    iframe.src = gameInfo.url;
+    // Open the game URL in a new tab
+    window.open(gameInfo.url, '_blank');
 
     // Add the game to recently played
     addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
 }
-
