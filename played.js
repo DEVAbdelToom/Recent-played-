@@ -67,3 +67,23 @@ document.addEventListener("DOMContentLoaded", function () {
         addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
     }
 });
+
+
+            // Function to handle game link clicks
+function handleGameLinkClick(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    const gameLink = event.currentTarget;
+    const gameInfo = {
+        name: gameLink.querySelector("h2").textContent,
+        imageSrc: gameLink.querySelector("img").src,
+        url: gameLink.querySelector("a").href,
+    };
+
+    // Set the iframe source to the game's URL
+    const iframe = document.querySelector(".game-iframe");
+    iframe.src = gameInfo.url;
+
+    // Add the game to recently played
+    addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
+}
+
