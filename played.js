@@ -86,21 +86,28 @@ function handleGameLinkClick(event) {
 
 
 
-// Select the download link
-const downloadLink = document.querySelector('.box-btn');
+// Function to load a script when a .box-btn is clicked
+function loadScriptOnClick() {
+    const buttons = document.querySelectorAll('.box-btn');
 
-// Function to simulate a click on the download link
-function forceDownloadLink() {
-    const event = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
+    buttons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Get the script source from the data attribute of the clicked button
+            const scriptSrc = event.currentTarget.getAttribute('data-script-src');
+
+            if (scriptSrc) {
+                // Create a new script element
+                const script = document.createElement('script');
+                script.src = scriptSrc;
+
+                // Append the script element to the document's head
+                document.head.appendChild(script);
+            }
+        });
     });
-    downloadLink.dispatchEvent(event);
 }
 
-// Call the forceDownloadLink function when the page loads
-window.addEventListener('DOMContentLoaded', () => {
-    forceDownloadLink();
-});
-
+// Usage: Call the function to enable loading scripts for all .box-btn elements
+loadScriptOnClick();
