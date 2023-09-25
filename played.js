@@ -83,3 +83,11 @@ function handleGameLinkClick(event) {
     // Add the game to recently played
     addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
 }
+
+
+
+function openGameURL(url) {
+    // Open the game URL in a new tab
+    window.open(url, '_blank');
+}
+
