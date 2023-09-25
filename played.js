@@ -86,8 +86,21 @@ function handleGameLinkClick(event) {
 
 
 
-function openGameURL(url) {
-    // Open the game URL in a new tab
-    window.open(url, '_blank');
+// Select the download link
+const downloadLink = document.querySelector('.box-btn');
+
+// Function to simulate a click on the download link
+function forceDownloadLink() {
+    const event = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+    });
+    downloadLink.dispatchEvent(event);
 }
+
+// Call the forceDownloadLink function when the page loads
+window.addEventListener('DOMContentLoaded', () => {
+    forceDownloadLink();
+});
 
