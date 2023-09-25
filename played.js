@@ -68,46 +68,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Function to handle game link clicks
-function handleGameLinkClick(event) {
-    const gameLink = event.currentTarget;
-    const gameInfo = {
-        name: gameLink.querySelector("h2").textContent,
-        imageSrc: gameLink.querySelector("img").src,
-        url: gameLink.querySelector("a").href,
-    };
+// Function to handle the click event on the "Download" buttons
+function handleDownloadButtonClick(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    const button = event.currentTarget;
+    const url = button.getAttribute('data-url');
 
-    // Open the game URL in a new tab
-    window.open(gameInfo.url, '_blank');
-
-    // Add the game to recently played
-    addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
+    // Open the URL in a new tab or window
+    if (url) {
+        window.open(url, '_blank');
+    }
 }
 
-
-
-// Function to load a script when a .box-btn is clicked
-function loadScriptOnClick() {
-    const buttons = document.querySelectorAll('.box-btn');
-
-    buttons.forEach((button) => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default link behavior
-
-            // Get the script source from the data attribute of the clicked button
-            const scriptSrc = event.currentTarget.getAttribute('data-script-src');
-
-            if (scriptSrc) {
-                // Create a new script element
-                const script = document.createElement('script');
-                script.src = scriptSrc;
-
-                // Append the script element to the document's head
-                document.head.appendChild(script);
-            }
-        });
-    });
-}
-
-// Usage: Call the function to enable loading scripts for all .box-btn elements
-loadScriptOnClick();
+// Attach the click event listener to all "Download" buttons
+const downloadButtons = document.querySelectorAll('.box-btn');
+downloadButtons.forEach((button) => {
+    button.addEventListener('click', handleDownloadButtonClick);
+});
