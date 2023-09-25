@@ -1,4 +1,17 @@
-document.addEventListener("DOMContentLoaded", function () {
+// Function to handle the click event on the "Download" buttons
+function handleDownloadButtonClick(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    const button = event.currentTarget;
+    const url = button.getAttribute('data-url');
+
+    // Open the URL in a new tab or window
+    if (url) {
+        window.open(url, '_blank');
+    }
+}
+
+// Function to initialize recently played games and download button functionality
+function initializePage() {
     // Define an array to store recently played games
     const recentlyPlayedGames = [];
     const maxRecentlyPlayedGames = 10; // Maximum number of recently played games to display
@@ -66,22 +79,13 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         addGameToRecentlyPlayed(gameInfo.name, gameInfo.imageSrc, gameInfo.url);
     }
-});
 
-// Function to handle the click event on the "Download" buttons
-function handleDownloadButtonClick(event) {
-    event.preventDefault(); // Prevent the default link behavior
-    const button = event.currentTarget;
-    const url = button.getAttribute('data-url');
-
-    // Open the URL in a new tab or window
-    if (url) {
-        window.open(url, '_blank');
-    }
+    // Attach the click event listener to all "Download" buttons
+    const downloadButtons = document.querySelectorAll('.box-btn');
+    downloadButtons.forEach((button) => {
+        button.addEventListener('click', handleDownloadButtonClick);
+    });
 }
 
-// Attach the click event listener to all "Download" buttons
-const downloadButtons = document.querySelectorAll('.box-btn');
-downloadButtons.forEach((button) => {
-    button.addEventListener('click', handleDownloadButtonClick);
-});
+// Call the initializePage function when the page is fully loaded
+document.addEventListener("DOMContentLoaded", initializePage);
